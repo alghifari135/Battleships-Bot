@@ -63,35 +63,29 @@ def check_vertical(x, y, opponent_map, map_size):
     global undef
     j = y-1
     fail_top = False
-    for cell in opponent_map:
-        if (cell['X']==x and cell['Y']==j):
-            break
     while (is_on_map(x, j, map_size) and not (fail_top)):
+        for cell in opponent_map:
+            if (cell['X']==x and cell['Y']==j):
+                break
         if (cell['Missed']):
             fail_top = True
         elif not (cell['Damaged']):
             return (x,j)
         else:
             j -= 1
-            for cell in opponent_map:
-                if (cell['X']==x and cell['Y']==j):
-                    break
     
     j = y+1
     fail_bottom = False
-    for cell in opponent_map:
-        if (cell['X']==x and cell['Y']==j):
-            break
     while (is_on_map(x, j, map_size) and not (fail_bottom)):
+        for cell in opponent_map:
+            if (cell['X']==x and cell['Y']==j):
+                break
         if (cell['Missed']):
             fail_bottom = True
         elif not (cell['Damaged']):
             return (x,j)
         else:
             j += 1
-            for cell in opponent_map:
-                if (cell['X']==x and cell['Y']==j):
-                    break
 
     if (fail_top and fail_bottom):
         return undef,undef
@@ -100,35 +94,29 @@ def check_horizontal(x, y, opponent_map, map_size):
     global undef
     i = x+1
     fail_right = False
-    for cell in opponent_map:
-        if (cell['X']==i and cell['Y']==y):
-            break
     while (is_on_map(i, y, map_size) and not fail_right):
+        for cell in opponent_map:
+            if (cell['X']==i and cell['Y']==y):
+                break
         if (cell['Missed']):
             fail_right = True
         elif not (cell['Damaged']):
             return (i,y)
         else:
             i += 1
-            for cell in opponent_map:
-                if (cell['X']==i and cell['Y']==y):
-                    break
     
     i=x+1
     fail_left = False
-    for cell in opponent_map:
-        if (cell['X']==i and cell['Y']==y):
-            break
     while (is_on_map(i, y, map_size) and not fail_left):
+        for cell in opponent_map:
+            if (cell['X']==i and cell['Y']==y):
+                break
         if (cell['Missed']):
             fail_left = True
         elif not (cell['Damaged']):
             return (i,y)
         else:
             i -= 1
-            for cell in opponent_map:
-                if (cell['X']==i and cell['Y']==y):
-                    break
 
     if (fail_right and fail_left):
         return undef,undef
