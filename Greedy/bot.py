@@ -47,6 +47,56 @@ def main(player_key):
 def is_sunk(x,y):
     return x,y
 
+def check_vertical(x, y, opponent_map):
+    j = y-1
+    fail_top = False
+    while (is_on_map(x,j) and not fail_top):
+        if (opponent_map[x][j]=='Missed'):
+            fail_top = True
+        elif (opponent_map[x][j]!='Damaged'):
+            return (x,j)
+        else:
+            j -= 1
+    
+    j = y+1
+    fail_bottom = False
+    while (is_on_map(x, j) and not fail_bottom):
+        if (opponent_map[x][j] == 'Missed'):
+            fail_bottom = True
+            break
+        elif (opponent_map[x][j] != 'Damaged'):
+            return (x, j)
+        else:
+            j += 1
+
+    if (fail_top and fail_bottom):
+        return undef
+
+
+def check_horizontal(x, y, opponent_map):
+    i = x+1
+    fail_right = False
+    while (is_on_map(i,y) and not fail_right):
+        if (opponent_map[i][y] == 'Missed'):
+            fail_right = True
+        elif (opponent_map[i][y] != 'Damaged'):
+            return (i, y)
+        else:
+            i += 1
+
+    i = x-1
+    fail_left = False
+    while (is_on_map(i, y) and not fail_left):
+        if (opponent_map[i][y] == 'Missed'):
+            fail_left = True
+        elif (opponent_map[i][y] != 'Damaged'):
+            return (i, y)
+        else:
+            i -= 1
+
+    if (fail_right and fail_left):
+        return undef
+
 def hunting(opponent_map):
 	# Search all points that meet these requirements:
 	# Have NOT been (damaged OR missed) AND (x+y%2=1)
