@@ -35,7 +35,7 @@ def main(player_key):
         opponent_map = state['OpponentMap']['Cells']
         for cell in opponent_map:
             if (cell['Damaged'] and visited_map[cell['X']][cell['Y']]==0):
-                x,y = is_sunk(cell['X'], cell['Y'])
+                x,y = is_sunk(cell['X'], cell['Y'], state)
                 if (x!=undef and y!=undef):
                     output_shot(x,y)
                     target = 1
@@ -44,8 +44,29 @@ def main(player_key):
         if not (target):
             hunting(opponent_map)
 
-def is_sunk(x,y):
+def is_on_map(x,y,map_size):
+    return (x>=0 and x<map_size and y>=0 and y<map_size)
+
+def is_sunk(x,y,state):
+    opponent_map = state['OpponentMap']['Cells']
+    map_size = state['MapDimension']
+    i, j = check_vertical(x,y,opponent_map)
+    if (is_on_map(i,j,map_size)):
+        return i,j
+    else:
+        i, j = check_horizontal(x,y,opponent_map)
+        if (is_on_map(i,j,map_size)):
+            return i,j
+    i=undef
+    j=undef
+    return i,j
+
+def check_vertical(x,y,opponent_map):
     return x,y
+
+def check_horizontal(x,y,opponent_map):
+    return x,y
+
 
 def hunting(opponent_map):
 	# Search all points that meet these requirements:
