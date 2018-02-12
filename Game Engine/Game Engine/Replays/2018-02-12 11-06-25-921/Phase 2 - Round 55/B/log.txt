@@ -1,7 +1,0 @@
-
-12-02-2018 11:07:09:362 - D: 	Executing bot with following commands python.exe "bot.py" B "E:\Knowledge\Computer Science\Academic\Semester 4\IF2211 - Strategi Algoritma\Tugas\Tubes 1\Our Project\Game Engine\Game Engine\Replays\2018-02-12 11-06-25-921\Phase 2 - Round 55\B"
-12-02-2018 11:07:09:362 - I: 	Executing process python.exe "bot.py" B "E:\Knowledge\Computer Science\Academic\Semester 4\IF2211 - Strategi Algoritma\Tugas\Tubes 1\Our Project\Game Engine\Game Engine\Replays\2018-02-12 11-06-25-921\Phase 2 - Round 55\B"
-12-02-2018 11:07:09:393 - I: 	Bot has 4000ms to run before it will be forcefully killed
-12-02-2018 11:07:09:509 - I: 	Output from bot: 
-12-02-2018 11:07:09:509 - E: 	Output from bot: 
-12-02-2018 11:07:09:509 - I: 	Your bots total execution time was 00:00:00.1410715
