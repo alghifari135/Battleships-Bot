@@ -8,9 +8,22 @@ place_ship_file = "place.txt"
 game_state_file = "state.json"
 output_path = '.'
 map_size = 0
+visited_map = [[0,0,0,0,0,0,0,0,0,0],
+                [0,0,0,0,0,0,0,0,0,0],
+                [0,0,0,0,0,0,0,0,0,0],
+                [0,0,0,0,0,0,0,0,0,0],
+                [0,0,0,0,0,0,0,0,0,0],
+                [0,0,0,0,0,0,0,0,0,0],
+                [0,0,0,0,0,0,0,0,0,0],
+                [0,0,0,0,0,0,0,0,0,0],
+                [0,0,0,0,0,0,0,0,0,0],
+                [0,0,0,0,0,0,0,0,0,0]]
+undef = 99
 
 def main(player_key):
     global map_size
+    global visited_map
+    global undef
     # Retrieve current game state
     with open(os.path.join(output_path, game_state_file), 'r') as f_in:
         state = json.load(f_in)
@@ -18,7 +31,21 @@ def main(player_key):
     if state['Phase'] == 1:
         place_ships()
     else:
-        hunting(state['OpponentMap']['Cells'])
+        target = 0
+        opponent_map = state['OpponentMap']['Cells']
+        for cell in opponent_map:
+            if (cell['Damaged'] and visited_map[cell['X']][cell['Y']]==0):
+                x,y = is_sunk(cell['X'], cell['Y'])
+                if (x!=undef and y!=undef):
+                    output_shot(x,y)
+                    target = 1
+                    break
+                visited_map[cell['X']][cell['Y']]=1
+        if not (target):
+            hunting(opponent_map)
+
+def is_sunk(x,y):
+    return x,y
 
 def hunting(opponent_map):
 	# Search all points that meet these requirements:
@@ -45,18 +72,18 @@ def place_ships():
 	# Ship names: Battleship, Cruiser, Carrier, Destroyer, Submarine
 	# Directions: north east south west
 
-	ships = ['Battleship 1 0 north',
-			'Carrier 3 1 East',
-			'Cruiser 4 2 north',
-			'Destroyer 7 3 north',
-			'Submarine 1 8 East'
-			]
+    ships = ['Battleship 1 3 north',
+             'Carrier 3 0 East',
+             'Cruiser 6 1 north',
+             'Destroyer 7 7 north',
+             'Submarine 4 8 East'
+             ]
 
-	with open(os.path.join(output_path, place_ship_file), 'w') as f_out:
-		for ship in ships:
-			f_out.write(ship)
-			f_out.write('\n')
-	return
+    with open(os.path.join(output_path, place_ship_file), 'w') as f_out:
+        for ship in ships:
+            f_out.write(ship)
+            f_out.write('\n')
+    return
 
 if __name__ == '__main__':
     parser = argparse.ArgumentParser()
