@@ -35,7 +35,7 @@ def main(player_key):
         opponent_map = state['OpponentMap']['Cells']
         for cell in opponent_map:
             if (cell['Damaged'] and visited_map[cell['X']][cell['Y']]==0):
-                x,y = is_sunk(cell['X'], cell['Y'])
+                x,y = is_sunk(cell['X'], cell['Y'], state)
                 if (x!=undef and y!=undef):
                     output_shot(x,y)
                     target = 1
@@ -44,13 +44,28 @@ def main(player_key):
         if not (target):
             hunting(opponent_map)
 
-def is_sunk(x,y):
-    return x,y
+def is_on_map(x,y,map_size):
+    return (x>=0 and x<map_size and y>=0 and y<map_size)
 
-def check_vertical(x, y, opponent_map):
+def is_sunk(x,y,state):
+    opponent_map = state['OpponentMap']['Cells']
+    map_size = state['MapDimension']
+    i, j = check_vertical(x,y,opponent_map, map_size)
+    if (is_on_map(i,j,map_size)):
+        return i,j
+    else:
+        i, j = check_horizontal(x, y, opponent_map, map_size)
+        if (is_on_map(i,j,map_size)):
+            return i,j
+    i=undef
+    j=undef
+    return i,j
+
+
+def check_vertical(x, y, opponent_map, map_size):
     j = y-1
     fail_top = False
-    while (is_on_map(x,j) and not fail_top):
+    while (is_on_map(x, j, map_size) and not fail_top):
         if (opponent_map[x][j]=='Missed'):
             fail_top = True
         elif (opponent_map[x][j]!='Damaged'):
@@ -60,7 +75,7 @@ def check_vertical(x, y, opponent_map):
     
     j = y+1
     fail_bottom = False
-    while (is_on_map(x, j) and not fail_bottom):
+    while (is_on_map(x, j, map_size) and not fail_bottom):
         if (opponent_map[x][j] == 'Missed'):
             fail_bottom = True
             break
@@ -73,10 +88,10 @@ def check_vertical(x, y, opponent_map):
         return undef
 
 
-def check_horizontal(x, y, opponent_map):
+def check_horizontal(x, y, opponent_map, map_size):
     i = x+1
     fail_right = False
-    while (is_on_map(i,y) and not fail_right):
+    while (is_on_map(i, y, map_size) and not fail_right):
         if (opponent_map[i][y] == 'Missed'):
             fail_right = True
         elif (opponent_map[i][y] != 'Damaged'):
@@ -86,7 +101,7 @@ def check_horizontal(x, y, opponent_map):
 
     i = x-1
     fail_left = False
-    while (is_on_map(i, y) and not fail_left):
+    while (is_on_map(i, y, map_size) and not fail_left):
         if (opponent_map[i][y] == 'Missed'):
             fail_left = True
         elif (opponent_map[i][y] != 'Damaged'):
