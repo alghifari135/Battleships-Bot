@@ -1,0 +1,9 @@
+E:\Knowledge\Computer Science\Academic\Semester 4\IF2211 - Strategi Algoritma\Tugas\Tubes 1\Our Project\GameVisualizer\ReplayZ\bin\Debug\netcoreapp1.1\ReplayZ.deps.json
+E:\Knowledge\Computer Science\Academic\Semester 4\IF2211 - Strategi Algoritma\Tugas\Tubes 1\Our Project\GameVisualizer\ReplayZ\bin\Debug\netcoreapp1.1\ReplayZ.runtimeconfig.json
+E:\Knowledge\Computer Science\Academic\Semester 4\IF2211 - Strategi Algoritma\Tugas\Tubes 1\Our Project\GameVisualizer\ReplayZ\bin\Debug\netcoreapp1.1\ReplayZ.runtimeconfig.dev.json
+E:\Knowledge\Computer Science\Academic\Semester 4\IF2211 - Strategi Algoritma\Tugas\Tubes 1\Our Project\GameVisualizer\ReplayZ\bin\Debug\netcoreapp1.1\ReplayZ.dll
+E:\Knowledge\Computer Science\Academic\Semester 4\IF2211 - Strategi Algoritma\Tugas\Tubes 1\Our Project\GameVisualizer\ReplayZ\bin\Debug\netcoreapp1.1\ReplayZ.pdb
+E:\Knowledge\Computer Science\Academic\Semester 4\IF2211 - Strategi Algoritma\Tugas\Tubes 1\Our Project\GameVisualizer\ReplayZ\obj\Debug\netcoreapp1.1\ReplayZ.csproj.CoreCompileInputs.cache
+E:\Knowledge\Computer Science\Academic\Semester 4\IF2211 - Strategi Algoritma\Tugas\Tubes 1\Our Project\GameVisualizer\ReplayZ\obj\Debug\netcoreapp1.1\ReplayZ.AssemblyInfo.cs
+E:\Knowledge\Computer Science\Academic\Semester 4\IF2211 - Strategi Algoritma\Tugas\Tubes 1\Our Project\GameVisualizer\ReplayZ\obj\Debug\netcoreapp1.1\ReplayZ.dll
+E:\Knowledge\Computer Science\Academic\Semester 4\IF2211 - Strategi Algoritma\Tugas\Tubes 1\Our Project\GameVisualizer\ReplayZ\obj\Debug\netcoreapp1.1\ReplayZ.pdb

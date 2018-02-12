@@ -1,0 +1,16 @@
+
+12-02-2018 11:06:26:638 - I: 	Executing process python.exe "" A "E:\Knowledge\Computer Science\Academic\Semester 4\IF2211 - Strategi Algoritma\Tugas\Tubes 1\Our Project\Game Engine\Game Engine\Replays\2018-02-12 11-06-25-921\Phase 1 - Round 0\A"
+12-02-2018 11:06:27:024 - E: 	Failed to run calibration test System.InvalidOperationException: Cannot process request because the process (10924) has exited.
+   at System.Diagnostics.Process.GetProcessHandle(Int32 access, Boolean throwIfExited)
+   at System.Diagnostics.Process.set_PriorityClass(ProcessPriorityClass value)
+   at BotRunner.Util.ProcessHandler.StartProcessCommon() in C:\Development\Entelect Challenge\2017-Battleships\GameEngine\Battleships\BotRunner\Util\ProcessHandler.cs:line 93
+   at BotRunner.Util.ProcessHandler.RunProcess() in C:\Development\Entelect Challenge\2017-Battleships\GameEngine\Battleships\BotRunner\Util\ProcessHandler.cs:line 79
+   at TestHarness.TestHarnesses.Bot.Runners.PythonRunner.RunCalibrationTest() in C:\Development\Entelect Challenge\2017-Battleships\GameEngine\Battleships\BotRunner\Harness\Bot\Runners\PythonRunner.cs:line 51
+   at TestHarness.TestHarnesses.Bot.BotRunner.CalibrateBot() in C:\Development\Entelect Challenge\2017-Battleships\GameEngine\Battleships\BotRunner\Harness\Bot\BotRunner.cs:line 41
+12-02-2018 11:06:27:024 - I: 	Bot calibration complete and can run an additional 387ms due to environment startup
+12-02-2018 11:06:27:024 - D: 	Executing bot with following commands python.exe "bot.py" A "E:\Knowledge\Computer Science\Academic\Semester 4\IF2211 - Strategi Algoritma\Tugas\Tubes 1\Our Project\Game Engine\Game Engine\Replays\2018-02-12 11-06-25-921\Phase 1 - Round 0\A"
+12-02-2018 11:06:27:039 - I: 	Executing process python.exe "bot.py" A "E:\Knowledge\Computer Science\Academic\Semester 4\IF2211 - Strategi Algoritma\Tugas\Tubes 1\Our Project\Game Engine\Game Engine\Replays\2018-02-12 11-06-25-921\Phase 1 - Round 0\A"
+12-02-2018 11:06:27:140 - I: 	Bot has 4000ms to run before it will be forcefully killed
+12-02-2018 11:06:27:271 - E: 	Output from bot: 
+12-02-2018 11:06:27:271 - I: 	Output from bot: 
+12-02-2018 11:06:27:325 - I: 	Your bots total execution time was 00:00:00.2351173

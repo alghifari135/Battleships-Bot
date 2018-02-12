@@ -1,0 +1,11 @@
+
+12-02-2018 09:22:22:896 - I: 	Player Command DoNothingCommand failed because There was a problem during the placement of player's py3Bot ships (DoNothing), the round will be played over
+12-02-2018 09:22:22:927 - I: 	The first round has failed due to a bot's ships not all being placed
+12-02-2018 09:22:23:349 - D: 	Executing bot with following commands python.exe "bot.py" A "E:\Knowledge\Computer Science\Academic\Semester 4\IF2211 - Strategi Algoritma\Tugas\Tubes 1\Our Project\Game Engine\Game Engine\Replays\2018-02-12 09-22-21-753\Phase 1 - Round 1\A"
+12-02-2018 09:22:23:349 - I: 	Executing process python.exe "bot.py" A "E:\Knowledge\Computer Science\Academic\Semester 4\IF2211 - Strategi Algoritma\Tugas\Tubes 1\Our Project\Game Engine\Game Engine\Replays\2018-02-12 09-22-21-753\Phase 1 - Round 1\A"
+12-02-2018 09:22:23:349 - E: 	Failure while executing bot python.exe "bot.py" A "E:\Knowledge\Computer Science\Academic\Semester 4\IF2211 - Strategi Algoritma\Tugas\Tubes 1\Our Project\Game Engine\Game Engine\Replays\2018-02-12 09-22-21-753\Phase 1 - Round 1\A"System.ComponentModel.Win32Exception (0x80004005): The system cannot find the file specified
+   at System.Diagnostics.Process.StartWithCreateProcess(ProcessStartInfo startInfo)
+   at System.Diagnostics.Process.Start()
+   at BotRunner.Util.ProcessHandler.StartProcessCommon() in C:\Development\Entelect Challenge\2017-Battleships\GameEngine\Battleships\BotRunner\Util\ProcessHandler.cs:line 87
+   at BotRunner.Util.ProcessHandler.RunProcess() in C:\Development\Entelect Challenge\2017-Battleships\GameEngine\Battleships\BotRunner\Util\ProcessHandler.cs:line 79
+   at TestHarness.TestHarnesses.Bot.BotRunner.RunBot() in C:\Development\Entelect Challenge\2017-Battleships\GameEngine\Battleships\BotRunner\Harness\Bot\BotRunner.cs:line 78

@@ -1,0 +1,18 @@
+
+12-02-2018 09:28:38:731 - I: 	Executing process python.exe "" B "E:\Knowledge\Computer Science\Academic\Semester 4\IF2211 - Strategi Algoritma\Tugas\Tubes 1\Our Project\Game Engine\Game Engine\Replays\2018-02-12 09-28-34-055\Phase 1 - Round 0\B"
+12-02-2018 09:28:38:747 - E: 	Failed to run calibration test System.ComponentModel.Win32Exception (0x80004005): The system cannot find the file specified
+   at System.Diagnostics.Process.StartWithCreateProcess(ProcessStartInfo startInfo)
+   at System.Diagnostics.Process.Start()
+   at BotRunner.Util.ProcessHandler.StartProcessCommon() in C:\Development\Entelect Challenge\2017-Battleships\GameEngine\Battleships\BotRunner\Util\ProcessHandler.cs:line 87
+   at BotRunner.Util.ProcessHandler.RunProcess() in C:\Development\Entelect Challenge\2017-Battleships\GameEngine\Battleships\BotRunner\Util\ProcessHandler.cs:line 79
+   at TestHarness.TestHarnesses.Bot.Runners.PythonRunner.RunCalibrationTest() in C:\Development\Entelect Challenge\2017-Battleships\GameEngine\Battleships\BotRunner\Harness\Bot\Runners\PythonRunner.cs:line 51
+   at TestHarness.TestHarnesses.Bot.BotRunner.CalibrateBot() in C:\Development\Entelect Challenge\2017-Battleships\GameEngine\Battleships\BotRunner\Harness\Bot\BotRunner.cs:line 41
+12-02-2018 09:28:38:747 - I: 	Bot calibration complete and can run an additional 10ms due to environment startup
+12-02-2018 09:28:38:793 - D: 	Executing bot with following commands python.exe "bot.py" B "E:\Knowledge\Computer Science\Academic\Semester 4\IF2211 - Strategi Algoritma\Tugas\Tubes 1\Our Project\Game Engine\Game Engine\Replays\2018-02-12 09-28-34-055\Phase 1 - Round 0\B"
+12-02-2018 09:28:38:793 - I: 	Executing process python.exe "bot.py" B "E:\Knowledge\Computer Science\Academic\Semester 4\IF2211 - Strategi Algoritma\Tugas\Tubes 1\Our Project\Game Engine\Game Engine\Replays\2018-02-12 09-28-34-055\Phase 1 - Round 0\B"
+12-02-2018 09:28:38:793 - E: 	Failure while executing bot python.exe "bot.py" B "E:\Knowledge\Computer Science\Academic\Semester 4\IF2211 - Strategi Algoritma\Tugas\Tubes 1\Our Project\Game Engine\Game Engine\Replays\2018-02-12 09-28-34-055\Phase 1 - Round 0\B"System.ComponentModel.Win32Exception (0x80004005): The system cannot find the file specified
+   at System.Diagnostics.Process.StartWithCreateProcess(ProcessStartInfo startInfo)
+   at System.Diagnostics.Process.Start()
+   at BotRunner.Util.ProcessHandler.StartProcessCommon() in C:\Development\Entelect Challenge\2017-Battleships\GameEngine\Battleships\BotRunner\Util\ProcessHandler.cs:line 87
+   at BotRunner.Util.ProcessHandler.RunProcess() in C:\Development\Entelect Challenge\2017-Battleships\GameEngine\Battleships\BotRunner\Util\ProcessHandler.cs:line 79
+   at TestHarness.TestHarnesses.Bot.BotRunner.RunBot() in C:\Development\Entelect Challenge\2017-Battleships\GameEngine\Battleships\BotRunner\Harness\Bot\BotRunner.cs:line 78
