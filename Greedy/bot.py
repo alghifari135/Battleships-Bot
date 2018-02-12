@@ -31,23 +31,22 @@ def main(player_key):
     if state['Phase'] == 1:
         place_ships()
     else:
-        target = 0
         opponent_map = state['OpponentMap']['Cells']
         for cell in opponent_map:
-            if (cell['Damaged'] and visited_map[cell['X']][cell['Y']]==0):
+            # visited_map[cell['X']][cell['Y']]==0
+            if (cell['Damaged']):
                 x,y = is_sunk(cell['X'], cell['Y'], state)
-                if (x!=undef and y!=undef):
+                if (is_on_map(x,y,map_size)):
                     output_shot(x,y)
-                    target = 1
-                    break
-                visited_map[cell['X']][cell['Y']]=1
-        if not (target):
-            hunting(opponent_map)
+                    return
+                # visited_map[cell['X']][cell['Y']]=1
+        hunting(opponent_map)
 
 def is_on_map(x,y,map_size):
     return (x>=0 and x<map_size and y>=0 and y<map_size)
 
 def is_sunk(x,y,state):
+    global undef
     opponent_map = state['OpponentMap']['Cells']
     map_size = state['MapDimension']
     i, j = check_vertical(x,y,opponent_map, map_size)
@@ -57,60 +56,84 @@ def is_sunk(x,y,state):
         i, j = check_horizontal(x, y, opponent_map, map_size)
         if (is_on_map(i,j,map_size)):
             return i,j
-    i=undef
-    j=undef
-    return i,j
+    return undef,undef
 
 
 def check_vertical(x, y, opponent_map, map_size):
+    global undef
     j = y-1
     fail_top = False
-    while (is_on_map(x, j, map_size) and not fail_top):
-        if (opponent_map[x][j]=='Missed'):
+    for cell in opponent_map:
+        if (cell['X']==x and cell['Y']==j):
+            break
+    while (is_on_map(x, j, map_size) and not (fail_top)):
+        if (cell['Missed']):
             fail_top = True
-        elif (opponent_map[x][j]!='Damaged'):
+        elif not (cell['Damaged']):
             return (x,j)
         else:
             j -= 1
+            for cell in opponent_map:
+                if (cell['X']==x and cell['Y']==j):
+                    break
     
     j = y+1
     fail_bottom = False
-    while (is_on_map(x, j, map_size) and not fail_bottom):
-        if (opponent_map[x][j] == 'Missed'):
-            fail_bottom = True
+    for cell in opponent_map:
+        if (cell['X']==x and cell['Y']==j):
             break
-        elif (opponent_map[x][j] != 'Damaged'):
-            return (x, j)
+    while (is_on_map(x, j, map_size) and not (fail_bottom)):
+        if (cell['Missed']):
+            fail_bottom = True
+        elif not (cell['Damaged']):
+            return (x,j)
         else:
             j += 1
+            for cell in opponent_map:
+                if (cell['X']==x and cell['Y']==j):
+                    break
 
     if (fail_top and fail_bottom):
-        return undef
-
+        return undef,undef
 
 def check_horizontal(x, y, opponent_map, map_size):
+    global undef
     i = x+1
     fail_right = False
+    for cell in opponent_map:
+        if (cell['X']==i and cell['Y']==y):
+            break
     while (is_on_map(i, y, map_size) and not fail_right):
-        if (opponent_map[i][y] == 'Missed'):
+        if (cell['Missed']):
             fail_right = True
-        elif (opponent_map[i][y] != 'Damaged'):
-            return (i, y)
+        elif not (cell['Damaged']):
+            return (i,y)
         else:
             i += 1
-
-    i = x-1
+            for cell in opponent_map:
+                if (cell['X']==i and cell['Y']==y):
+                    break
+    
+    i=x+1
     fail_left = False
+    for cell in opponent_map:
+        if (cell['X']==i and cell['Y']==y):
+            break
     while (is_on_map(i, y, map_size) and not fail_left):
-        if (opponent_map[i][y] == 'Missed'):
+        if (cell['Missed']):
             fail_left = True
-        elif (opponent_map[i][y] != 'Damaged'):
-            return (i, y)
+        elif not (cell['Damaged']):
+            return (i,y)
         else:
             i -= 1
+            for cell in opponent_map:
+                if (cell['X']==i and cell['Y']==y):
+                    break
 
     if (fail_right and fail_left):
-        return undef
+        return undef,undef
+
+
 
 def hunting(opponent_map):
 	# Search all points that meet these requirements:
