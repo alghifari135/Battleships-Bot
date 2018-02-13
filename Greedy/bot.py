@@ -32,12 +32,13 @@ def main(player_key):
         place_ships()
     else:
         opponent_map = state['OpponentMap']['Cells']
+        player_own = state['PlayerMap']['Owner']
         for cell in opponent_map:
             # visited_map[cell['X']][cell['Y']]==0
             if (cell['Damaged']):
                 x,y = is_sunk(cell['X'], cell['Y'], state)
                 if (is_on_map(x,y,map_size)):
-                    output_shot(x,y)
+                    output_shot(x,y,player_own)
                     return
                 # visited_map[cell['X']][cell['Y']]=1
         hunting(opponent_map)
@@ -58,36 +59,35 @@ def is_sunk(x,y,state):
             return i,j
     return undef,undef
 
-
 def check_vertical(x, y, opponent_map, map_size):
     global undef
     j = y-1
     fail_top = False
     while (is_on_map(x, j, map_size) and not (fail_top)):
-        for cell in opponent_map:
-            if (cell['X']==x and cell['Y']==j):
-                break
-        if (cell['Missed']):
+        idx = x*10+j
+        if (opponent_map[idx]['Missed']):
             fail_top = True
-        elif not (cell['Damaged']):
+        elif not (opponent_map[idx]['Damaged']):
             return (x,j)
         else:
             j -= 1
-    
+    if not (is_on_map(x, j, map_size)):
+        fail_top=True
+
     j = y+1
     fail_bottom = False
     while (is_on_map(x, j, map_size) and not (fail_bottom)):
-        for cell in opponent_map:
-            if (cell['X']==x and cell['Y']==j):
-                break
-        if (cell['Missed']):
+        idx = x*10+j
+        if (opponent_map[idx]['Missed']):
             fail_bottom = True
-        elif not (cell['Damaged']):
+        elif not (opponent_map[idx]['Damaged']):
             return (x,j)
         else:
             j += 1
+    if not (is_on_map(x, j, map_size)):
+        fail_bottom=True
 
-    if (fail_top or fail_bottom):
+    if (fail_top and fail_bottom):
         return undef,undef
 
 def check_horizontal(x, y, opponent_map, map_size):
@@ -95,30 +95,30 @@ def check_horizontal(x, y, opponent_map, map_size):
     i = x+1
     fail_right = False
     while (is_on_map(i, y, map_size) and not fail_right):
-        for cell in opponent_map:
-            if (cell['X']==i and cell['Y']==y):
-                break
-        if (cell['Missed']):
+        idx = i*10+y
+        if (opponent_map[idx]['Missed']):
             fail_right = True
-        elif not (cell['Damaged']):
+        elif not (opponent_map[idx]['Damaged']):
             return (i,y)
         else:
             i += 1
-    
-    i=x+1
+    if not (is_on_map(i, y, map_size)):
+        fail_right=True
+
+    i=x-1
     fail_left = False
     while (is_on_map(i, y, map_size) and not fail_left):
-        for cell in opponent_map:
-            if (cell['X']==i and cell['Y']==y):
-                break
-        if (cell['Missed']):
+        idx = i*10+y
+        if (opponent_map[idx]['Missed']):
             fail_left = True
-        elif not (cell['Damaged']):
+        elif not (opponent_map[idx]['Damaged']):
             return (i,y)
         else:
             i -= 1
+    if not (is_on_map(i, y, map_size)):
+        fail_left=True
 
-    if (fail_right or fail_left):
+    if (fail_right and fail_left):
         return undef,undef
 
 
@@ -137,6 +137,7 @@ def hunting(opponent_map):
 	return
 
 def output_shot(x, y):
+
     move = 1  # 1=fire shot command code
     with open(os.path.join(output_path, command_file), 'w') as f_out:
         f_out.write('{},{},{}'.format(move, x, y))
