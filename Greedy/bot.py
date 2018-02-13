@@ -32,13 +32,11 @@ def main(player_key):
         place_ships()
     else:
         opponent_map = state['OpponentMap']['Cells']
-        player_own = state['PlayerMap']['Owner']
         for cell in opponent_map:
             # visited_map[cell['X']][cell['Y']]==0
             if (cell['Damaged']):
                 x,y = is_sunk(cell['X'], cell['Y'], state)
                 if (is_on_map(x,y,map_size)):
-                    output_shot(x,y,player_own)
                     return
                 # visited_map[cell['X']][cell['Y']]=1
         hunting(opponent_map)
