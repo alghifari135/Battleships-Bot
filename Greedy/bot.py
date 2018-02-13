@@ -50,14 +50,40 @@ def is_sunk(x,y,state):
     global undef
     opponent_map = state['OpponentMap']['Cells']
     map_size = state['MapDimension']
-    
-    i, j = check_vertical(x,y,opponent_map, map_size)
-    if (is_on_map(i,j,map_size)):
-        return i,j
+    if (is_on_map(x+1,y,map_size)):
+        cell1 = opponent_map[(x+1)*10+y]['Damaged']
     else:
+        cell1 = False
+    if (is_on_map(x-1,y,map_size)):
+        cell2 = opponent_map[(x-1)*10+y]['Damaged']
+    else:
+        cell2 = False
+    if (is_on_map(x,y+1,map_size)):
+        cell3 = opponent_map[(x)*10+(y+1)]['Damaged']
+    else:
+        cell3 = False
+    if (is_on_map(x,y-1,map_size)):
+        cell4 = opponent_map[(x)*10+(y-1)]['Damaged']
+    else:
+        cell4 = False
+
+
+    if (cell1 or cell2):
         i, j = check_horizontal(x, y, opponent_map, map_size)
         if (is_on_map(i,j,map_size)):
             return i,j
+    elif (cell3 or cell4):
+        i, j = check_vertical(x,y,opponent_map, map_size)
+        if (is_on_map(i,j,map_size)):
+            return i,j
+    else:    
+        i, j = check_vertical(x,y,opponent_map, map_size)
+        if (is_on_map(i,j,map_size)):
+            return i,j
+        else:
+            i, j = check_horizontal(x, y, opponent_map, map_size)
+            if (is_on_map(i,j,map_size)):
+                return i,j
     return undef,undef
 
 def check_vertical(x, y, opponent_map, map_size):
@@ -138,19 +164,22 @@ def hunting(opponent_map,player_own):
 	return
 
 def output_shot(x, y, player_own):
-    energy = player_own['Energy']
-    ships = player_own['Ships']
+    # energy = player_own['Energy']
+    # ships = player_own['Ships']
     move = 1
-    if (energy>=14):
-        for ship in ships :
-            if (ship['ShipType']=="Battleship" and not ship['Destroyed']):
-                move = 6  # Cross Shot Diagonal
-            elif (ship['ShipType'] == "Submarine" and not ship['Destroyed']):
-                move = 7  # Seeker Missile
-    elif (energy>=10):
-        for ship in ships:
-            if (ship['ShipType'] == "Submarine" and not ship['Destroyed']):
-                move = 7  # Seeker Missile
+    # if (energy>=37):
+    #     for ship in ships :
+    #         if (ship['ShipType']=="Battleship" and not ship['Destroyed']):
+    #             move = 6  # Cross Shot Diagonal
+    #             break
+    #         elif (ship['ShipType'] == "Submarine" and not ship['Destroyed']):
+    #             move = 7  # Seeker Missile
+    #             break
+    # elif (energy>=33):
+    #     for ship in ships:
+    #         if (ship['ShipType'] == "Submarine" and not ship['Destroyed']):
+    #             move = 7  # Seeker Missile
+    #             break
 
     with open(os.path.join(output_path, command_file), 'w') as f_out:
         f_out.write('{},{},{}'.format(move, x, y))
