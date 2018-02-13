@@ -49,13 +49,34 @@ def is_sunk(x,y,state):
     global undef
     opponent_map = state['OpponentMap']['Cells']
     map_size = state['MapDimension']
-    i, j = check_vertical(x,y,opponent_map, map_size)
-    if (is_on_map(i,j,map_size)):
-        return i,j
-    else:
+    for cell1 in opponent_map:
+        if (cell1['X']==x+1 and cell1['Y']==y):
+            break
+    for cell2 in opponent_map:
+        if (cell2['X']==x-1 and cell2['Y']==y):
+            break
+    for cell3 in opponent_map:
+        if (cell3['X']==x and cell1['Y']==y+1):
+            break
+    for cell4 in opponent_map:
+        if (cell4['X']==x and cell2['Y']==y-1):
+            break
+    if (cell1['Damaged'] or cell2['Damaged']):
         i, j = check_horizontal(x, y, opponent_map, map_size)
         if (is_on_map(i,j,map_size)):
             return i,j
+    elif (cell3['Damaged'] or cell4['Damaged']):
+        i, j = check_vertical(x,y,opponent_map, map_size)
+        if (is_on_map(i,j,map_size)):
+            return i,j
+    else:
+        i, j = check_vertical(x,y,opponent_map, map_size)
+        if (is_on_map(i,j,map_size)):
+            return i,j
+        else:
+            i, j = check_horizontal(x, y, opponent_map, map_size)
+            if (is_on_map(i,j,map_size)):
+                return i,j
     return undef,undef
 
 
