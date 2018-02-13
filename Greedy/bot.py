@@ -73,7 +73,8 @@ def check_vertical(x, y, opponent_map, map_size):
             return (x,j)
         else:
             j -= 1
-    
+    if not (is_on_map(x, j, map_size)):
+        fail_top=True    
     j = y+1
     fail_bottom = False
     while (is_on_map(x, j, map_size) and not (fail_bottom)):
@@ -86,7 +87,8 @@ def check_vertical(x, y, opponent_map, map_size):
             return (x,j)
         else:
             j += 1
-
+    if not (is_on_map(x, j, map_size)):
+        fail_bottom=True
     if (fail_top and fail_bottom):
         return undef,undef
 
@@ -104,7 +106,8 @@ def check_horizontal(x, y, opponent_map, map_size):
             return (i,y)
         else:
             i += 1
-    
+    if not (is_on_map(i, y, map_size)):
+        fail_right=True
     i=x+1
     fail_left = False
     while (is_on_map(i, y, map_size) and not fail_left):
@@ -117,7 +120,8 @@ def check_horizontal(x, y, opponent_map, map_size):
             return (i,y)
         else:
             i -= 1
-
+    if not (is_on_map(i, y, map_size)):
+        fail_left=True
     if (fail_right and fail_left):
         return undef,undef
 
