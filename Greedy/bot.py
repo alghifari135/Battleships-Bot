@@ -87,7 +87,7 @@ def check_vertical(x, y, opponent_map, map_size):
         else:
             j += 1
 
-    if (fail_top and fail_bottom):
+    if (fail_top or fail_bottom):
         return undef,undef
 
 def check_horizontal(x, y, opponent_map, map_size):
@@ -118,7 +118,7 @@ def check_horizontal(x, y, opponent_map, map_size):
         else:
             i -= 1
 
-    if (fail_right and fail_left):
+    if (fail_right or fail_left):
         return undef,undef
 
 
