@@ -32,14 +32,16 @@ def main(player_key):
         place_ships()
     else:
         opponent_map = state['OpponentMap']['Cells']
+        player_own = state['PlayerMap']['Owner']
         for cell in opponent_map:
             # visited_map[cell['X']][cell['Y']]==0
             if (cell['Damaged']):
                 x,y = is_sunk(cell['X'], cell['Y'], state)
                 if (is_on_map(x,y,map_size)):
+                    output_shot(x,y,player_own)
                     return
                 # visited_map[cell['X']][cell['Y']]=1
-        hunting(opponent_map)
+        hunting(opponent_map, player_own)
 
 def is_on_map(x,y,map_size):
     return (x>=0 and x<map_size and y>=0 and y<map_size)
@@ -48,6 +50,7 @@ def is_sunk(x,y,state):
     global undef
     opponent_map = state['OpponentMap']['Cells']
     map_size = state['MapDimension']
+    
     i, j = check_vertical(x,y,opponent_map, map_size)
     if (is_on_map(i,j,map_size)):
         return i,j
@@ -121,7 +124,7 @@ def check_horizontal(x, y, opponent_map, map_size):
 
 
 
-def hunting(opponent_map):
+def hunting(opponent_map,player_own):
 	# Search all points that meet these requirements:
 	# Have NOT been (damaged OR missed) AND (x+y%2=1)
 	targets = []
@@ -131,12 +134,24 @@ def hunting(opponent_map):
 			valid_cell = cell['X'], cell['Y']
 			targets.append(valid_cell)
 	target = choice(targets)
-	output_shot(*target)
+	output_shot(*target,player_own)
 	return
 
-def output_shot(x, y):
+def output_shot(x, y, player_own):
+    energy = player_own['Energy']
+    ships = player_own['Ships']
+    move = 1
+    if (energy>=14):
+        for ship in ships :
+            if (ship['ShipType']=="Battleship" and not ship['Destroyed']):
+                move = 6  # Cross Shot Diagonal
+            elif (ship['ShipType'] == "Submarine" and not ship['Destroyed']):
+                move = 7  # Seeker Missile
+    elif (energy>=10):
+        for ship in ships:
+            if (ship['ShipType'] == "Submarine" and not ship['Destroyed']):
+                move = 7  # Seeker Missile
 
-    move = 1  # 1=fire shot command code
     with open(os.path.join(output_path, command_file), 'w') as f_out:
         f_out.write('{},{},{}'.format(move, x, y))
         f_out.write('\n')
