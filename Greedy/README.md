@@ -1,6 +1,6 @@
-# Python3
+# TUGAS BESAR IF2211 - STRATEGI ALGORITMA
 
-## py3Bot
-
-Python 3 standard library. Never attacks the same square twice. 
-Simplified and partially plagiarized version of Christian's Python2 bot.
+Oleh : 
+Mochamad Alghifari				13516038
+Muhammad Alfian Rasyidin	13516104
+Ivan Fadillah							13516128
